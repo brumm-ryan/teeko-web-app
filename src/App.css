@@ -28,6 +28,36 @@
   color: #61dafb;
 }
 
+.input-color {
+  position: relative;
+}
+.input-color input {
+  padding-left: 20px;
+}
+.input-color .color-box {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-color: #ccc;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
+.grid-container {
+  display: grid;
+  align-content: space-evenly;
+  column-gap: 50px;
+  row-gap: 50px;
+  grid-template-columns: repeat(5, 100px);
+  grid-template-rows: repeat(5, 100px);
+  grid-auto-flow: column;
+}
+
+.grid-container {
+  display: inline-grid;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

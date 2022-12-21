@@ -1,0 +1,14 @@
+.input-color {
+    position: relative;
+}
+.input-color input {
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.input-color .color-box {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+}
+
