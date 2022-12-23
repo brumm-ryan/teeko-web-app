@@ -21,9 +21,12 @@ class App extends React.Component {
 
   getMoveFromAI() {
       //TODO implement python api using flask to return ai move
-      let stringBoard = `${this.state.board.flat()}`
-      let response = fetch(`http://pythonAI/${stringBoard}`).then((response) => response.json())
-      return response['move']
+
+      let flatBoard = this.state.board.flat()
+      let stringBoard = ""
+      flatBoard.forEach((num) => stringBoard += num)
+      let response = fetch(`https://teeko-ai-backend.herokuapp.com/ai-move/?board=${stringBoard}`).then((response) => response.json())
+          .then((actualData) => console.log(actualData))
   }
 
   playerChooseTile(player, xCord, yCord) {
@@ -38,8 +41,7 @@ class App extends React.Component {
         }
           this.state.playerPieces.push([xCord, yCord])
           this.setState({board: tempBoard});
-          //let aiMove = this.getMoveFromAI();
-          //this.playerChooseTile(2, aiMove[0], aiMove[1]);
+          this.getMoveFromAI();
       } else {
           if (player === 2) {
               if(this.state.aiPieces.length > 3) {
