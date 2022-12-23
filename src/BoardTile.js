@@ -17,7 +17,6 @@ class BoardTile extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props.currentVal === 1 && this.state.player !== 1) {
-            console.log("Should be blue anymore")
             this.setState({isPlaced:true, player:1, color:"#0000FF"})
         } else if(this.props.currentVal === 2 && this.state.player !== 2) {
             this.setState({isPlaced:true, player:2, color:"red"})

@@ -26,7 +26,7 @@ class App extends React.Component {
       let stringBoard = ""
       flatBoard.forEach((num) => stringBoard += num)
       let response = fetch(`https://teeko-ai-backend.herokuapp.com/ai-move/?board=${stringBoard}`).then((response) => response.json())
-          .then((actualData) => console.log(actualData))
+          .then((actualData) => this.playerChooseTile(2, actualData['move'][0][0], actualData['move'][0][1]))
   }
 
   playerChooseTile(player, xCord, yCord) {
