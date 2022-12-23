@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/teeko-web-app/static/css/main.4fe49a83.css",
+    "main.js": "/teeko-web-app/static/js/main.4a10fda4.js",
+    "static/js/787.b2855db4.chunk.js": "/teeko-web-app/static/js/787.b2855db4.chunk.js",
+    "index.html": "/teeko-web-app/index.html",
+    "main.4fe49a83.css.map": "/teeko-web-app/static/css/main.4fe49a83.css.map",
+    "main.4a10fda4.js.map": "/teeko-web-app/static/js/main.4a10fda4.js.map",
+    "787.b2855db4.chunk.js.map": "/teeko-web-app/static/js/787.b2855db4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4fe49a83.css",
+    "static/js/main.4a10fda4.js"
+  ]
+}
