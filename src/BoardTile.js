@@ -6,31 +6,71 @@ import "./BoardTile.css";
  *
  */
 class BoardTile extends React.Component {
+    playerPiece = 'b';
+    aiPiece = 'r';
+    emptyPiece = 's';
+    highlightPiece = 'h';
+    pickedUpPiece = 'p';
     constructor(props) {
         super(props);
         this.state = {
-            isPlaced: this.props.currentVal !== 0,
-            player: this.props.player,
+            isPlaced: this.props.currentVal !== this.emptyPiece,
+            player: this.props.currentVal,
             color: "#D3D3D3"
         };
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.currentVal === 1 && this.state.player !== 1) {
-            this.setState({isPlaced:true, player:1, color:"#0000FF"})
-        } else if(this.props.currentVal === 2 && this.state.player !== 2) {
-            this.setState({isPlaced:true, player:2, color:"red"})
-        } else if(this.props.currentVal === 0 && this.state.player !== 0){
-            this.setState({isPlaced:false, player:0, color:"#D3D3D3"})
+        if(this.props.currentVal === this.playerPiece && this.state.player !== this.playerPiece) {
+            this.setState({isPlaced:true, player:this.playerPiece, color:"#0000FF"})
+        } else if(this.props.currentVal === this.aiPiece && this.state.player !== this.aiPiece) {
+            this.setState({isPlaced:true, player:this.aiPiece, color:"red"})
+        } else if(this.props.currentVal === this.emptyPiece && this.state.player !== this.emptyPiece){
+            this.setState({isPlaced:false, player:this.emptyPiece, color:"#D3D3D3"})
+        } else if(this.props.currentVal === this.highlightPiece && this.state.player !== this.highlightPiece){
+            this.setState({isPlaced:false, player:this.highlightPiece, color:"#90EE90"})
+        }
+    }
+
+    checkIfValidMove(xCord, yCord) {
+        if(Math.abs(this.props.pickedUpPiece[0] - xCord) > 1 || Math.abs(this.props.pickedUpPiece[1] - yCord) > 1) {
+            console.log('invalid move');
+            return false;
+        } else {
+            return true;
         }
     }
 
     chooseTile() {
-        if(!this.state.isPlaced) {
-            this.props.chooseTileCallback(1, this.props.xAxis, this.props.yAxis)
-            this.setState({isPlaced:true, player:1, color:"#0000FF"})
-            console.log(`x-Axis:${this.props.xAxis} y-Axis:${this.props.yAxis}`)
+        if(this.state.player !== this.aiPiece) {
+            if (this.state.isPlaced) {
+                if (!this.props.isDropPhase) {
+                    this.props.notifyPickUp(false);
+                    this.props.pickUpPiece([this.props.xAxis, this.props.yAxis])
+                    // TODO Call to highlight possible moves
+                }
+            } else {
+                console.log(this.props.isDropPhase)
+                if (this.props.isDropPhase) {
+                    // set tile to be selected as usual
+                    this.setState({isPlaced: true, player: this.playerPiece, color: "#0000FF"})
+                    this.props.chooseTileCallback([this.props.xAxis, this.props.yAxis])
+                } else {
+                    //ensure that there's a piece selected to be picked up before we put this piece down
+                    if (this.props.isPickedUp) {
+                        if(this.checkIfValidMove(this.props.xAxis, this.props.yAxis)) {
+                            console.log(`valid move from ${[this.props.pickedUpPiece[0], this.props.pickedUpPiece[1]]} to 
+                            ${[this.props.xAxis, this.props.yAxis]}`)
+                            this.props.removeAllHighlights([this.props.xAxis, this.props.yAxis])
+                            this.setState({isPlaced: true, player: this.playerPiece, color: "#0000FF"})
+                        }
+                    } else {
+                        this.props.notifyPickUp(true);
+                    }
+                }
+            }
         }
+        // add functionality to pickup a piece then use that one to be replaced
     }
 
     render() {
