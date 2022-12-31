@@ -1,70 +1,18 @@
-# Getting Started with Create React App
+# Welcome to my Teeko web app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Try your hand against it here -> https://brumm-ryan.github.io/teeko-web-app/
 
-## Available Scripts
+This is the front end web app built using react and is hosted on github pages.
 
-In the project directory, you can run:
+## What is Teeko?
 
-### `npm start`
+Teeko is an abstract strategy game with similiarities to Connect-Four.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How to Play
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Each player has 4 pieces. You and your opponent alternate placing each of your pieces on any open spot on the 5 x 5 board.  Once all pieces have been initially been placed on the board you and your oppponenet take turns selecting a piece and moving it to an open adjacent space.  Your goal is to get all 4 of your pieces in a row. This can be vertical, horizontal or diagonal.  There is an additional win condition where you position your pieces as the corners of a 3 x 3 box.  Reach one of these win conditions before your opponenet and you will be victorious.  
 
-### `npm test`
+Also you will be playing against an AI. Best of luck.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Checkout the backend code here to see how the AI picks its next move.](https://github.com/brumm-ryan/teeko-ai)
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
