@@ -47,8 +47,8 @@
 .grid-container {
   display: grid;
   align-content: space-evenly;
-  column-gap: 50px;
-  row-gap: 50px;
+  column-gap: 40px;
+  row-gap: 40px;
   grid-template-columns: repeat(5, 100px);
   grid-template-rows: repeat(5, 100px);
   grid-auto-flow: column;

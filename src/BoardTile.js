@@ -47,10 +47,8 @@ class BoardTile extends React.Component {
                 if (!this.props.isDropPhase) {
                     this.props.notifyPickUp(false);
                     this.props.pickUpPiece([this.props.xAxis, this.props.yAxis])
-                    // TODO Call to highlight possible moves
                 }
             } else {
-                console.log(this.props.isDropPhase)
                 if (this.props.isDropPhase) {
                     // set tile to be selected as usual
                     this.setState({isPlaced: true, player: this.playerPiece, color: "#0000FF"})
@@ -70,7 +68,6 @@ class BoardTile extends React.Component {
                 }
             }
         }
-        // add functionality to pickup a piece then use that one to be replaced
     }
 
     render() {

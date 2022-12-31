@@ -1,4 +1,7 @@
 import React from "react";
+import Card from 'react-bootstrap/Card';
+import Nav from 'react-bootstrap/Nav';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import BoardTile from "./BoardTile";
 import "./BoardTile.css";
 import "./App.css";
@@ -22,7 +25,9 @@ class App extends React.Component {
         pickedUpPiece: [],
         inProgress:false,
         needPickUp:false,
-        winner:this.emptyPiece
+        winner:this.emptyPiece,
+        playerScore:0,
+        aiScore:0
     };
     this.playerChooseTile = this.playerChooseTile.bind(this);
     this.notifyPickUp = this.notifyPickUp.bind(this);
@@ -66,8 +71,10 @@ class App extends React.Component {
   playerWon(winNum) {
     if(winNum === -1) {
         this.setState({winner: this.playerPiece})
+        this.setState({playerScore: this.state.playerScore + 1});
     } else if(winNum === 1) {
         this.setState({winner: this.aiPiece})
+        this.setState({aiScore: this.state.aiScore + 1});
     }
   }
 
@@ -99,8 +106,6 @@ class App extends React.Component {
   }
 
   boardToString(){
-      // TODO add logic to ensure only 'r', 'b', and 's' pieces are sent through
-      //    No highlighted or pickedUp ones
       let flatBoard = this.state.board.flat()
       let stringBoard = ""
       flatBoard.forEach((tileString) => stringBoard += tileString)
@@ -216,16 +221,46 @@ class App extends React.Component {
     }
   }
 
+  generateScoreBoard() {
+    return (
+        <Card>
+            <Card.Title>
+                Player: {this.state.playerScore} AI: {this.state.aiScore}
+            </Card.Title>
+        </Card>)
+  }
+
+  AlignmentExample() {
+        return (
+            <>
+                <Nav className="justify-content-end" activeKey="/home">
+                    <Nav.Item>
+                        <Nav.Link href="https://www.linkedin.com/in/ryan-brumm/">Me</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link href="https://github.com/brumm-ryan/teeko-web-app">GitHub Repo</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link href="https://bonaludo.com/2016/07/27/teeko-a-game-and-a-masterpiece-of-john-scarne-the-wizard-of-games/">What is Teeko?</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+            </>
+        );
+    }
+
   render() {
     return (
         <div style={{textAlign:"center"}}>
+            <div>{this.AlignmentExample()}</div>
           <h1 hidden={this.state.winner !== this.emptyPiece}>Can you beat this AI at Teeko?</h1>
             <h1 hidden={this.state.winner !== this.playerPiece}>You beat the AI</h1>
             <h1 hidden={this.state.winner !== this.aiPiece}>Submit to AI dominance</h1>
+            <h2 hidden={!this.state.needPickUp}>Pick one of your pieces before selecting where to place it</h2>
             <div style={{padding:"20px"}}>
                 <button hidden={this.state.inProgress} onClick={() => this.startGame()}>I'll try</button>
                 <button hidden={this.state.winner === this.emptyPiece} onClick={() => this.playAgain()}>Play Again</button>
             </div>
+            <div>{this.generateScoreBoard()}</div>
           <div>{this.generateBoard()}</div>
         </div>
     );
