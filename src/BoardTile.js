@@ -42,6 +42,7 @@ class BoardTile extends React.Component {
     }
 
     chooseTile() {
+        if(this.props.isFrozen) {return}
         if(this.state.player !== this.aiPiece) {
             if (this.state.isPlaced) {
                 if (!this.props.isDropPhase) {

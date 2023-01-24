@@ -27,7 +27,8 @@ class App extends React.Component {
         needPickUp:false,
         winner:this.emptyPiece,
         playerScore:0,
-        aiScore:0
+        aiScore:0,
+        freeze:false
     };
     this.playerChooseTile = this.playerChooseTile.bind(this);
     this.notifyPickUp = this.notifyPickUp.bind(this);
@@ -52,7 +53,8 @@ class App extends React.Component {
         pickUpPiece: [],
         inProgress:false,
         needPickUp:false,
-        winner: this.emptyPiece
+        winner: this.emptyPiece,
+        freeze:false
       });
       this.startGame();
   }
@@ -76,6 +78,7 @@ class App extends React.Component {
         this.setState({winner: this.aiPiece})
         this.setState({aiScore: this.state.aiScore + 1});
     }
+    this.setState({freeze:true})
   }
 
   getMoveFromAI() {
@@ -127,6 +130,7 @@ class App extends React.Component {
   }
 
   pickUpPiece(piece) {
+      this.removeAllHighlights()
       this.setState({pickedUpPiece: piece}, () => this.highlightPieces(piece[0], piece[1]))
   }
 
@@ -181,7 +185,11 @@ class App extends React.Component {
               }
           }
       }
-      this.setState({board:tempBoard}, () => this.playerChooseTile(move));
+      if(move != null) {
+          this.setState({board:tempBoard}, () => this.playerChooseTile(move));
+      } else {
+          this.setState({board:tempBoard});
+      }
       console.log('removed all highlights');
   }
 
@@ -214,7 +222,8 @@ class App extends React.Component {
                                            notifyPickUp={this.notifyPickUp}
                                            pickUpPiece={this.pickUpPiece}
                                            pickedUpPiece={this.state.pickedUpPiece}
-                                           removeAllHighlights={this.removeAllHighlights}>tile</BoardTile>);
+                                           removeAllHighlights={this.removeAllHighlights}
+                                           isFrozen={this.state.freeze}>tile</BoardTile>);
             })
         })
         return (<div className="grid-container">{boardTiles}</div>)
@@ -223,7 +232,10 @@ class App extends React.Component {
 
   generateScoreBoard() {
     return (
-        <Card>
+        <Card className="custom-card">
+            <Card.Title>
+                -Scoreboard-
+            </Card.Title>
             <Card.Title>
                 Player: {this.state.playerScore} AI: {this.state.aiScore}
             </Card.Title>
@@ -256,12 +268,10 @@ class App extends React.Component {
             <h1 hidden={this.state.winner !== this.playerPiece}>You beat the AI</h1>
             <h1 hidden={this.state.winner !== this.aiPiece}>Submit to AI dominance</h1>
             <h2 hidden={!this.state.needPickUp}>Pick one of your pieces before selecting where to place it</h2>
-            <div style={{padding:"20px"}}>
-                <button hidden={this.state.inProgress} onClick={() => this.startGame()}>I'll try</button>
-                <button hidden={this.state.winner === this.emptyPiece} onClick={() => this.playAgain()}>Play Again</button>
-            </div>
             <div>{this.generateScoreBoard()}</div>
-          <div>{this.generateBoard()}</div>
+            <button className={"button"} hidden={this.state.inProgress} onClick={() => this.startGame()}>I'll try</button>
+            <button className={"button"} hidden={this.state.winner === this.emptyPiece} onClick={() => this.playAgain()}>Play Again</button>
+            <div>{this.generateBoard()}</div>
         </div>
     );
   }
